@@ -1,0 +1,545 @@
+{
+  "users": [
+    {
+      "id": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "name": "Sanjay Deshmukh",
+      "email": "sanjay.deshmukh@krishiline.gov.in",
+      "phone": "9876540001",
+      "role": "clerk",
+      "roleTitle": "Government Mandi Clerk",
+      "centre": "Nashik Procurement Center - 1",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z",
+      "lastLoginAt": "2026-11-03T05:12:50.138Z"
+    },
+    {
+      "id": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "name": "Anil Pawar",
+      "email": "anil.pawar@krishiline.gov.in",
+      "phone": "9876540002",
+      "role": "warehouse",
+      "roleTitle": "Warehouse Supervisor",
+      "centre": "Nashik Procurement Center - 1",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z"
+    },
+    {
+      "id": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "name": "Meera Joshi",
+      "email": "meera.joshi@krishiline.gov.in",
+      "phone": "9876540003",
+      "role": "accountant",
+      "roleTitle": "Center Accountant",
+      "centre": "Nashik Procurement Center - 1",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:45:41.923Z",
+      "lastLoginAt": "2026-11-03T04:45:41.650Z"
+    },
+    {
+      "id": "usr_coll_1004",
+      "identifier": "EMP-1004",
+      "name": "Rahul Verma",
+      "email": "rahul.verma@krishiline.gov.in",
+      "phone": "9876540004",
+      "role": "collector",
+      "roleTitle": "Collector Admin Staff",
+      "centre": "Nashik District Headquarters",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z",
+      "lastLoginAt": "2026-11-03T04:48:26.926Z"
+    },
+    {
+      "id": "usr_fpo_01",
+      "identifier": "EMP-FPO-01",
+      "name": "Kisan Cooperative FPO",
+      "email": "manager@kisanfpo.org",
+      "phone": "9876540005",
+      "role": "fpo",
+      "roleTitle": "FPO Cooperative Manager",
+      "centre": "Nashik Agro Cluster",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z"
+    },
+    {
+      "id": "usr_admin_01",
+      "identifier": "EMP-ADMIN-01",
+      "name": "District Administrator",
+      "email": "admin@krishiline.gov.in",
+      "phone": "9876540000",
+      "role": "admin",
+      "roleTitle": "System Administrator",
+      "centre": "State IT / Agriculture Dept",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z"
+    },
+    {
+      "id": "usr_farmer_01",
+      "identifier": "KL-FARMER-001",
+      "name": "Ramesh Patil",
+      "email": "ramesh.patil@kahan.farmer.in",
+      "phone": "9876541234",
+      "role": "farmer",
+      "roleTitle": "Farmer / Producer",
+      "centre": "Nashik Procurement Center - 1",
+      "passwordHash": "$2b$10$Rdnrc0/2.INF4t0JFPgnKOn.pHZkQXxOpZktDzlceksM0xw9Od8g2",
+      "status": "Active",
+      "failedLoginAttempts": 0,
+      "emailVerified": true,
+      "phoneVerified": true,
+      "createdAt": "2026-11-03T04:44:34.704Z",
+      "updatedAt": "2026-11-03T04:44:34.704Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess_9a8d493a19b99030",
+      "token": "b245f6c806711dba048306394da5177ea4a6b1b7ae1e995110e9d9b32611af82",
+      "userId": "usr_1793682769189_62db21dd",
+      "role": "clerk",
+      "createdAt": 1793682769480,
+      "expiresAt": 1793689969480,
+      "rememberMe": false,
+      "ipAddress": "::1",
+      "userAgent": "node"
+    },
+    {
+      "id": "sess_441c706eef6a021e",
+      "token": "304ff59a40530842e6c8910999943bd1bb03f6b147f1102a9264ebf67e28d325",
+      "userId": "usr_1793682770572_f53822fe",
+      "role": "farmer",
+      "createdAt": 1793682770580,
+      "expiresAt": 1796274770580,
+      "rememberMe": true,
+      "ipAddress": "::1"
+    }
+  ],
+  "resetTokens": [
+    {
+      "token": "9ae948c95825581fe5ce9e98c4b7dd689439d7aeda8d39603dc04129e0ff3858",
+      "userId": "usr_acct_1003",
+      "createdAt": "2026-11-03T04:45:41.673Z",
+      "expiresAt": 1793682041673,
+      "used": true
+    }
+  ],
+  "auditLogs": [
+    {
+      "userId": "usr_coll_1004",
+      "identifier": "EMP-1004",
+      "action": "LOGOUT",
+      "status": "SUCCESS",
+      "ip": "::1",
+      "id": "log_1793683298388_84bb83ae",
+      "timestamp": "2026-11-03T05:21:38.390Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #5",
+      "ip": "::1",
+      "id": "log_1793682771931_5fbafbef",
+      "timestamp": "2026-11-03T05:12:51.932Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #4",
+      "ip": "::1",
+      "id": "log_1793682771624_ce78fbbc",
+      "timestamp": "2026-11-03T05:12:51.624Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #3",
+      "ip": "::1",
+      "id": "log_1793682771382_9beda291",
+      "timestamp": "2026-11-03T05:12:51.383Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #2",
+      "ip": "::1",
+      "id": "log_1793682771107_de270b1d",
+      "timestamp": "2026-11-03T05:12:51.107Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #1",
+      "ip": "::1",
+      "id": "log_1793682770844_203e49fe",
+      "timestamp": "2026-11-03T05:12:50.844Z"
+    },
+    {
+      "userId": "usr_1793682770572_f53822fe",
+      "identifier": "9658067152",
+      "action": "REGISTER",
+      "status": "SUCCESS",
+      "details": "Self-registered role: farmer. Village: Dindori, Gat: Gat 44",
+      "ip": "::1",
+      "id": "log_1793682770576_28dc083e",
+      "timestamp": "2026-11-03T05:12:50.576Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGOUT",
+      "status": "SUCCESS",
+      "ip": "::1",
+      "id": "log_1793682770278_afb0c241",
+      "timestamp": "2026-11-03T05:12:50.278Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: clerk (Government Mandi Clerk)",
+      "ip": "::1",
+      "id": "log_1793682770147_729688eb",
+      "timestamp": "2026-11-03T05:12:50.147Z"
+    },
+    {
+      "userId": "usr_1793682769189_62db21dd",
+      "identifier": "EMP-TEST-8862",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: clerk (Government Mandi Clerk)",
+      "ip": "::1",
+      "id": "log_1793682769490_9e37a1dc",
+      "timestamp": "2026-11-03T05:12:49.490Z"
+    },
+    {
+      "identifier": "EMP-TEST-8862",
+      "action": "OFFICIAL_PROVISIONED",
+      "status": "SUCCESS",
+      "details": "Provisioned as Government Mandi Clerk at Nashik Procurement Center - 2 via Admin Step 0",
+      "ip": "::1",
+      "id": "log_1793682769199_e1b3ea51",
+      "timestamp": "2026-11-03T05:12:49.199Z"
+    },
+    {
+      "userId": "usr_coll_1004",
+      "identifier": "EMP-1004",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: collector (Collector Admin Staff)",
+      "ip": "::1",
+      "id": "log_1793681306952_8dafcd8d",
+      "timestamp": "2026-11-03T04:48:26.952Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGOUT",
+      "status": "SUCCESS",
+      "ip": "::1",
+      "id": "log_1793681141944_1933f27c",
+      "timestamp": "2026-11-03T04:45:41.944Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "PASSWORD_RESET_COMPLETED",
+      "status": "SUCCESS",
+      "details": "Password reset completed via token. Sessions invalidated.",
+      "ip": "::1",
+      "id": "log_1793681141933_f010df7d",
+      "timestamp": "2026-11-03T04:45:41.933Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "FORGOT_PASSWORD_REQUEST",
+      "status": "SUCCESS",
+      "details": "Password reset token generated",
+      "ip": "::1",
+      "id": "log_1793681141677_57a66543",
+      "timestamp": "2026-11-03T04:45:41.677Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: accountant (Center Accountant)",
+      "ip": "::1",
+      "id": "log_1793681141658_56c9175a",
+      "timestamp": "2026-11-03T04:45:41.658Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "PASSWORD_RESET_COMPLETED",
+      "status": "SUCCESS",
+      "details": "Password reset completed via token. Sessions invalidated.",
+      "ip": "::1",
+      "id": "log_1793681141389_6a40126a",
+      "timestamp": "2026-11-03T04:45:41.390Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "FORGOT_PASSWORD_REQUEST",
+      "status": "SUCCESS",
+      "details": "Password reset token generated",
+      "ip": "::1",
+      "id": "log_1793681141084_7d860609",
+      "timestamp": "2026-11-03T04:45:41.084Z"
+    },
+    {
+      "userId": "usr_1793681141054_ce4bbd85",
+      "identifier": "KL-TEST-0817",
+      "action": "REGISTER",
+      "status": "SUCCESS",
+      "details": "Self-registered role: farmer. Village: Dindori, Gat: Gat 88/B",
+      "ip": "::1",
+      "id": "log_1793681141057_f8e956e2",
+      "timestamp": "2026-11-03T04:45:41.057Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: clerk (Government Mandi Clerk)",
+      "ip": "::1",
+      "id": "log_1793681140750_350dda28",
+      "timestamp": "2026-11-03T04:45:40.750Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #5",
+      "ip": "::1",
+      "id": "log_1793681140547_72351dec",
+      "timestamp": "2026-11-03T04:45:40.547Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #4",
+      "ip": "::1",
+      "id": "log_1793681140119_87d481af",
+      "timestamp": "2026-11-03T04:45:40.119Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #3",
+      "ip": "::1",
+      "id": "log_1793681139876_3d74fcdb",
+      "timestamp": "2026-11-03T04:45:39.879Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #2",
+      "ip": "::1",
+      "id": "log_1793681139640_7f0892e3",
+      "timestamp": "2026-11-03T04:45:39.640Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #1",
+      "ip": "::1",
+      "id": "log_1793681139387_294a7fa3",
+      "timestamp": "2026-11-03T04:45:39.387Z"
+    },
+    {
+      "userId": "usr_1793681139109_b2e6ade8",
+      "identifier": "9736143139",
+      "action": "REGISTER",
+      "status": "SUCCESS",
+      "details": "Self-registered role: farmer. Village: Sinnar, Gat: Gat 12",
+      "ip": "::1",
+      "id": "log_1793681139119_1817edc8",
+      "timestamp": "2026-11-03T04:45:39.119Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGOUT",
+      "status": "SUCCESS",
+      "ip": "::1",
+      "id": "log_1793681077856_1dd67074",
+      "timestamp": "2026-11-03T04:44:37.856Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "PASSWORD_RESET_COMPLETED",
+      "status": "SUCCESS",
+      "details": "Password reset completed via token. Sessions invalidated.",
+      "ip": "::1",
+      "id": "log_1793681077838_0cd47fca",
+      "timestamp": "2026-11-03T04:44:37.838Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "FORGOT_PASSWORD_REQUEST",
+      "status": "SUCCESS",
+      "details": "Password reset token generated",
+      "ip": "::1",
+      "id": "log_1793681077613_05ed0582",
+      "timestamp": "2026-11-03T04:44:37.613Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: accountant (Center Accountant)",
+      "ip": "::1",
+      "id": "log_1793681077595_d8bb63cd",
+      "timestamp": "2026-11-03T04:44:37.595Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "PASSWORD_RESET_COMPLETED",
+      "status": "SUCCESS",
+      "details": "Password reset completed via token. Sessions invalidated.",
+      "ip": "::1",
+      "id": "log_1793681077294_3b5f8683",
+      "timestamp": "2026-11-03T04:44:37.294Z"
+    },
+    {
+      "userId": "usr_acct_1003",
+      "identifier": "EMP-1003",
+      "action": "FORGOT_PASSWORD_REQUEST",
+      "status": "SUCCESS",
+      "details": "Password reset token generated",
+      "ip": "::1",
+      "id": "log_1793681077010_556fe16f",
+      "timestamp": "2026-11-03T04:44:37.010Z"
+    },
+    {
+      "userId": "usr_1793681076970_6cae4348",
+      "identifier": "KL-TEST-6672",
+      "action": "REGISTER",
+      "status": "SUCCESS",
+      "details": "Self-registered role: farmer. Village: Dindori, Gat: Gat 88/B",
+      "ip": "::1",
+      "id": "log_1793681076975_8aaf882b",
+      "timestamp": "2026-11-03T04:44:36.975Z"
+    },
+    {
+      "userId": "usr_clerk_1001",
+      "identifier": "EMP-1001",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: clerk (Government Mandi Clerk)",
+      "ip": "::1",
+      "id": "log_1793681076446_1836e4ed",
+      "timestamp": "2026-11-03T04:44:36.447Z"
+    },
+    {
+      "userId": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #5",
+      "ip": "::1",
+      "id": "log_1793681076184_3b168d16",
+      "timestamp": "2026-11-03T04:44:36.185Z"
+    },
+    {
+      "userId": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #4",
+      "ip": "::1",
+      "id": "log_1793681075906_fb911821",
+      "timestamp": "2026-11-03T04:44:35.906Z"
+    },
+    {
+      "userId": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #3",
+      "ip": "::1",
+      "id": "log_1793681075658_4b50175f",
+      "timestamp": "2026-11-03T04:44:35.658Z"
+    },
+    {
+      "userId": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #2",
+      "ip": "::1",
+      "id": "log_1793681075388_4d06278d",
+      "timestamp": "2026-11-03T04:44:35.388Z"
+    },
+    {
+      "userId": "usr_wh_1002",
+      "identifier": "EMP-1002",
+      "action": "LOGIN_INCORRECT_PASSWORD",
+      "status": "FAILED",
+      "details": "Failed attempt #1",
+      "ip": "::1",
+      "id": "log_1793681075052_ed64deb3",
+      "timestamp": "2026-11-03T04:44:35.053Z"
+    }
+  ]
+}

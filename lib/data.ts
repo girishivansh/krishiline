@@ -9,6 +9,7 @@
 
 export type BookingStatus = "Confirmed" | "Completed" | "In Yard";
 export type PaymentStatus = "Paid" | "Processing" | "Estimated" | "On Hold";
+export type WarehouseStatus = "Pending" | "Approved" | "Flagged";
 export type Grade = "1" | "2" | "3";
 export const GRADE_LABEL: Record<Grade, string> = { "1": "Grade 1 (Premium)", "2": "Grade 2 (Standard)", "3": "Grade 3 (Lower)" };
 export const GRADE_PRICES: Record<Grade, number> = { "1": 1850, "2": 1700, "3": 1550 };
@@ -21,6 +22,7 @@ export interface Booking {
   crop: string; quantityKg: number; grade: Grade; pricePerQuintal: number;
   status: BookingStatus; paymentStatus: PaymentStatus; utr: string | null; slot: string;
   trolley?: string; bags?: number;
+  warehouseStatus?: WarehouseStatus;
 }
 
 export const FARMER = {
@@ -41,27 +43,33 @@ export const CENTRES = [
 export const SLOTS = ["08:00 AM - 12:00 PM", "12:00 PM - 04:00 PM", "04:00 PM - 08:00 PM"];
 export const DEMO_OTP = "123456";
 
-// Ramesh's season bookings. 8 bookings, 9,540 kg = 95.4 quintals of the
-// 120-quintal ceiling (79.5% used). The 22 Oct booking is the cover's
-// receipt example: token KLN12345, batch B00124, 1,250 kg, Grade 1.
-export const SEED_BOOKINGS: Booking[] = [
-  { id: "B-1001", batchNo: "B00101", token: "KLN12301", receiptId: "R-2026-B00101", farmer: "Ramesh Patil", village: "Kahan", date: "2026-08-18", displayDate: "18 Aug 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 1240, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-884120", slot: "08:00 AM - 12:00 PM" },
-  { id: "B-1002", batchNo: "B00102", token: "KLN12302", receiptId: "R-2026-B00102", farmer: "Ramesh Patil", village: "Kahan", date: "2026-08-27", displayDate: "27 Aug 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1220, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-884291", slot: "08:00 AM - 12:00 PM" },
-  { id: "B-1003", batchNo: "B00103", token: "KLN12303", receiptId: "R-2026-B00103", farmer: "Ramesh Patil", village: "Kahan", date: "2026-09-12", displayDate: "12 Sep 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1320, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-885013", slot: "08:00 AM - 12:00 PM" },
-  { id: "B-1004", batchNo: "B00104", token: "KLN12304", receiptId: "R-2026-B00104", farmer: "Ramesh Patil", village: "Kahan", date: "2026-09-20", displayDate: "20 Sep 2026", centre: "Nashik Procurement Center - 3", centreShort: "Nashik - 3", crop: "Onion", quantityKg: 1100, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-885104", slot: "12:00 PM - 04:00 PM" },
-  { id: "B-1005", batchNo: "B00105", token: "KLN12305", receiptId: "R-2026-B00105", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-05", displayDate: "05 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1430, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-886207", slot: "08:00 AM - 12:00 PM" },
-  { id: "B-1006", batchNo: "B00106", token: "KLN12306", receiptId: "R-2026-B00106", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-14", displayDate: "14 Oct 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 980, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Processing", utr: null, slot: "08:00 AM - 12:00 PM" },
-  { id: "B-1007", batchNo: "B00124", token: "KLN12345", receiptId: "R-2026-B00124", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1250, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-886241", slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7841", bags: 57 },
-  { id: "B-1008", batchNo: "B00129", token: "KLN12360", receiptId: null, farmer: "Ramesh Patil", village: "Kahan", date: "2026-11-09", displayDate: "09 Nov 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1000, grade: "1", pricePerQuintal: 1850, status: "Confirmed", paymentStatus: "Estimated", utr: null, slot: "08:00 AM - 12:00 PM" },
-];
-
 // Other farmers' batches on 22 Oct 2026 — the shared queue for Clerk /
 // Warehouse / Accountant / Collector screens (cover pp. 3–5, 7).
 export const DISTRICT_BATCHES: Booking[] = [
-  { id: "B-2001", batchNo: "B00125", token: "KLN12350", receiptId: "R-2026-B00125", farmer: "Suresh Jadhav", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 980, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Paid", utr: "DEMO-UTR-886252", slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7842", bags: 45 },
-  { id: "B-2002", batchNo: "B00126", token: "KLN12351", receiptId: "R-2026-B00126", farmer: "Sunil Pawar", village: "Dindori", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1100, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Processing", utr: null, slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7843", bags: 50 },
-  { id: "B-2003", batchNo: "B00127", token: "KLN12352", receiptId: "R-2026-B00127", farmer: "Vilas Shinde", village: "Dindori", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 1020, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "On Hold", utr: null, slot: "12:00 PM - 04:00 PM", trolley: "MH-15-TR-7844", bags: 46 },
-  { id: "B-2004", batchNo: "B00128", token: "KLN12353", receiptId: null, farmer: "Mahesh Kale", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 900, grade: "2", pricePerQuintal: 1700, status: "In Yard", paymentStatus: "Estimated", utr: null, slot: "12:00 PM - 04:00 PM", trolley: "MH-15-TR-7845", bags: 41 },
+  { id: "B-2001", batchNo: "B00125", token: "KLN12350", receiptId: "R-2026-B00125", farmer: "Suresh Jadhav", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 980, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-886252", slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7842", bags: 45 },
+  { id: "B-2002", batchNo: "B00126", token: "KLN12351", receiptId: "R-2026-B00126", farmer: "Sunil Pawar", village: "Dindori", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1100, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Processing", warehouseStatus: "Pending", utr: null, slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7843", bags: 50 },
+  { id: "B-2003", batchNo: "B00127", token: "KLN12352", receiptId: "R-2026-B00127", farmer: "Vilas Shinde", village: "Dindori", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 1020, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "On Hold", warehouseStatus: "Flagged", utr: null, slot: "12:00 PM - 04:00 PM", trolley: "MH-15-TR-7844", bags: 46 },
+  { id: "B-2004", batchNo: "B00128", token: "KLN12353", receiptId: null, farmer: "Mahesh Kale", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 900, grade: "2", pricePerQuintal: 1700, status: "In Yard", paymentStatus: "Estimated", warehouseStatus: "Pending", utr: null, slot: "12:00 PM - 04:00 PM", trolley: "MH-15-TR-7845", bags: 41 },
+];
+
+// Ramesh's season bookings. 8 bookings, 9,540 kg = 95.4 quintals of the
+// 120-quintal ceiling (79.5% used). The 22 Oct booking is the cover's
+// receipt example: token KLN12345, batch B00124, 1,250 kg, Grade 1.
+export const RAMESH_BOOKINGS: Booking[] = [
+  { id: "B-1001", batchNo: "B00101", token: "KLN12301", receiptId: "R-2026-B00101", farmer: "Ramesh Patil", village: "Kahan", date: "2026-08-18", displayDate: "18 Aug 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 1240, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-884120", slot: "08:00 AM - 12:00 PM" },
+  { id: "B-1002", batchNo: "B00102", token: "KLN12302", receiptId: "R-2026-B00102", farmer: "Ramesh Patil", village: "Kahan", date: "2026-08-27", displayDate: "27 Aug 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1220, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-884291", slot: "08:00 AM - 12:00 PM" },
+  { id: "B-1003", batchNo: "B00103", token: "KLN12303", receiptId: "R-2026-B00103", farmer: "Ramesh Patil", village: "Kahan", date: "2026-09-12", displayDate: "12 Sep 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1320, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-885013", slot: "08:00 AM - 12:00 PM" },
+  { id: "B-1004", batchNo: "B00104", token: "KLN12304", receiptId: "R-2026-B00104", farmer: "Ramesh Patil", village: "Kahan", date: "2026-09-20", displayDate: "20 Sep 2026", centre: "Nashik Procurement Center - 3", centreShort: "Nashik - 3", crop: "Onion", quantityKg: 1100, grade: "3", pricePerQuintal: 1550, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-885104", slot: "12:00 PM - 04:00 PM" },
+  { id: "B-1005", batchNo: "B00105", token: "KLN12305", receiptId: "R-2026-B00105", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-05", displayDate: "05 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1430, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-886207", slot: "08:00 AM - 12:00 PM" },
+  { id: "B-1006", batchNo: "B00106", token: "KLN12306", receiptId: "R-2026-B00106", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-14", displayDate: "14 Oct 2026", centre: "Nashik Procurement Center - 2", centreShort: "Nashik - 2", crop: "Onion", quantityKg: 980, grade: "2", pricePerQuintal: 1700, status: "Completed", paymentStatus: "Processing", warehouseStatus: "Pending", utr: null, slot: "08:00 AM - 12:00 PM" },
+  { id: "B-1007", batchNo: "B00124", token: "KLN12345", receiptId: "R-2026-B00124", farmer: "Ramesh Patil", village: "Kahan", date: "2026-10-22", displayDate: "22 Oct 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1250, grade: "1", pricePerQuintal: 1850, status: "Completed", paymentStatus: "Paid", warehouseStatus: "Approved", utr: "DEMO-UTR-886241", slot: "08:00 AM - 12:00 PM", trolley: "MH-15-TR-7841", bags: 57 },
+  { id: "B-1008", batchNo: "B00129", token: "KLN12360", receiptId: null, farmer: "Ramesh Patil", village: "Kahan", date: "2026-11-09", displayDate: "09 Nov 2026", centre: "Nashik Procurement Center - 1", centreShort: "Nashik - 1", crop: "Onion", quantityKg: 1000, grade: "1", pricePerQuintal: 1850, status: "Confirmed", paymentStatus: "Estimated", warehouseStatus: "Pending", utr: null, slot: "08:00 AM - 12:00 PM" },
+];
+
+// Unified Seed Bookings combining Ramesh's history and the district 22 Oct queue
+export const SEED_BOOKINGS: Booking[] = [
+  ...RAMESH_BOOKINGS,
+  ...DISTRICT_BATCHES,
 ];
 
 export const grossFor = (b: { quantityKg: number; pricePerQuintal: number }) => Math.round((b.quantityKg / 100) * b.pricePerQuintal);
