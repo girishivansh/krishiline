@@ -4,6 +4,8 @@ import { Card, Badge, PageHead, PrimaryButton, GhostButton } from "@/components/
 import { useStore } from "@/lib/store";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { GRADE_LABEL, inr, grossFor, type WarehouseStatus } from "@/lib/data";
+import { KrishiVisionAI } from "@/components/ai/KrishiVisionAI";
+import { Sparkles, ShieldAlert } from "lucide-react";
 
 const ORANGE = (batchNo: string, grade: string) => batchNo === "B00126" || grade === "1";
 
@@ -25,6 +27,7 @@ function WarehouseDashboard() {
   );
   const [scanned, setScanned] = useState(false);
   const [note, setNote] = useState("");
+  const [showAiAudit, setShowAiAudit] = useState(false);
 
   const selected = activeQueue.find((b) => b.id === selectedId) ?? activeQueue[0];
 
@@ -151,9 +154,34 @@ function WarehouseDashboard() {
                 ? "This batch is flagged for a mandatory Orange scan — 100% of Premium Grade-1 batches are scanned, plus 15–20% random audits."
                 : "Green Pass: the trolley number on the sticker matches the screen. No scan needed — tap Approve in one second."}
             </p>
-            <PrimaryButton className="mt-3" onClick={() => setScanned(true)}>
-              {scanned ? "Scanned ✓ — Valid QR Sticker" : "Simulate QR scan"}
-            </PrimaryButton>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <PrimaryButton onClick={() => setScanned(true)}>
+                {scanned ? "Scanned ✓ — Valid QR Sticker" : "Simulate QR scan"}
+              </PrimaryButton>
+              <GhostButton
+                onClick={() => setShowAiAudit((p) => !p)}
+                className="flex items-center gap-1.5 border-emerald-300 text-emerald-800 hover:bg-emerald-50"
+              >
+                <Sparkles size={14} className="text-emerald-600" />
+                <span>{showAiAudit ? "Hide Optical AI Audit" : "Run Krishi-Vision Optical Audit"}</span>
+              </GhostButton>
+            </div>
+
+            {/* Krishi-Vision AI Spot-Check Panel */}
+            {(showAiAudit || orange) && (
+              <div className="mt-4">
+                <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-amber-800">
+                  <ShieldAlert size={14} />
+                  <span>Mandatory Optical Quality &amp; Moisture Spot Check</span>
+                </div>
+                <KrishiVisionAI
+                  batchNo={selected.batchNo}
+                  initialGrade={selected.grade}
+                  context="supervisor_spotcheck"
+                />
+              </div>
+            )}
+
             {scanned && (
               <div className="mt-3 rounded-xl bg-emerald-50 p-3 text-sm">
                 <p className="font-bold text-emerald-900">Valid QR Sticker</p>

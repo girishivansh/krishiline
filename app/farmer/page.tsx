@@ -20,6 +20,7 @@ import {
 import { Card, Badge, PrimaryButton, GhostButton } from "@/components/ui";
 import { useStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth/AuthContext";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import {
   FARMER,
   totalKg,
@@ -36,12 +37,13 @@ import { downloadReceipt } from "@/lib/receipt";
 export default function FarmerPortalDashboard() {
   const { bookings } = useStore();
   const { user } = useAuth();
+  const { language } = useLanguage();
   const [selectedReceipt, setSelectedReceipt] = useState<Booking | null>(null);
 
   // User details: Use authenticated user if role is farmer, else default demo profile (Ramesh Patil)
-  const farmerName = user && user.role === "farmer" ? user.name : FARMER.name;
+  const farmerName = user && user.role === "farmer" ? user.name : (language === "mr" ? "रमेश पाटील" : FARMER.name);
   const farmerId = user && user.role === "farmer" ? user.identifier : FARMER.farmerId;
-  const village = FARMER.village;
+  const village = language === "mr" ? "कहान (नाशिक)" : FARMER.village;
   const gatNo = FARMER.gat;
   const landAcres = FARMER.landAcres;
   const eligibleQuintals = FARMER.eligibleQuintals;
@@ -49,7 +51,7 @@ export default function FarmerPortalDashboard() {
 
   // Filter bookings for this farmer
   const farmerBookings = bookings.filter(
-    (b) => b.farmer.toLowerCase() === farmerName.toLowerCase() || b.token.startsWith("KLN")
+    (b) => b.farmer.toLowerCase().includes("patil") || b.farmer.toLowerCase().includes("पाटील") || b.token.startsWith("KLN")
   );
 
   const upcomingBookings = farmerBookings.filter((b) => b.status === "Confirmed" || b.status === "In Yard");
@@ -73,30 +75,31 @@ export default function FarmerPortalDashboard() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3 py-1 text-xs font-semibold text-emerald-200 border border-white/10 mb-3">
               <ShieldCheck size={14} className="text-emerald-400" />
-              <span>Verified 7/12 Landholder · Season Rabi 2026</span>
+              <span>{language === "mr" ? "प्रमाणित ७/१२ खातेदार · रब्बी हंगाम २०२६" : "Verified 7/12 Landholder · Season Rabi 2026"}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight">{farmerName}</h1>
             <p className="mt-1 text-sm text-emerald-200">
-              Farmer ID: <span className="font-mono font-bold text-white">{farmerId}</span> · Village:{" "}
-              <span className="font-semibold text-white">{village}</span> (Nashik) · Gat Number:{" "}
-              <span className="font-semibold text-white">{gatNo}</span> ({landAcres} Acres)
+              {language === "mr" ? "शेतकरी आयडी: " : "Farmer ID: "}
+              <span className="font-mono font-bold text-white">{farmerId}</span> · {language === "mr" ? "गाव: " : "Village: "}
+              <span className="font-semibold text-white">{village}</span> · {language === "mr" ? "गट क्र.: " : "Gat Number: "}
+              <span className="font-semibold text-white">{gatNo}</span> ({landAcres} {language === "mr" ? "एकर" : "Acres"})
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/farmer/book"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-sm hover:bg-emerald-50 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-xs hover:bg-emerald-50 transition-all"
             >
               <CalendarPlus size={16} className="text-emerald-700" />
-              <span>Book Delivery Slot</span>
+              <span>{language === "mr" ? "निश्चित स्लॉट बुक करा" : "Book Delivery Slot"}</span>
             </Link>
             <Link
               href="/farmer/qr"
               className="inline-flex items-center gap-2 rounded-xl bg-emerald-700/80 border border-emerald-500/40 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-700 transition-all"
             >
               <QrCode size={16} />
-              <span>View Active QR Token</span>
+              <span>{language === "mr" ? "सक्रिय क्यूआर टोकन" : "View Active QR Token"}</span>
             </Link>
           </div>
         </div>
@@ -105,17 +108,17 @@ export default function FarmerPortalDashboard() {
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 pt-6 border-t border-white/10">
           <div className="rounded-2xl bg-white/5 p-3.5 border border-white/5">
             <p className="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">
-              Season Yield Ceiling
+              {language === "mr" ? "हंगामी खरेदी मर्यादा" : "Season Yield Ceiling"}
             </p>
             <p className="mt-1 text-xl sm:text-2xl font-black">{yieldCeilingKg.toLocaleString("en-IN")} kg</p>
             <p className="text-[11px] text-emerald-200/70 mt-0.5">
-              {eligibleQuintals} Quintals (60 qtl/acre)
+              {eligibleQuintals} {language === "mr" ? "क्विंटल (६० क्विंटल/एकर)" : "Quintals (60 qtl/acre)"}
             </p>
           </div>
 
           <div className="rounded-2xl bg-white/5 p-3.5 border border-white/5">
             <p className="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">
-              Remaining Allowance
+              {language === "mr" ? "उर्वरित शिल्लक कोटा" : "Remaining Allowance"}
             </p>
             <p className="mt-1 text-xl sm:text-2xl font-black text-amber-300">
               {remainingKg.toLocaleString("en-IN")} kg
@@ -125,20 +128,24 @@ export default function FarmerPortalDashboard() {
 
           <div className="rounded-2xl bg-white/5 p-3.5 border border-white/5">
             <p className="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">
-              Realized DBT Payout
+              {language === "mr" ? "खात्यात थेट जमा" : "Realized DBT Payout"}
             </p>
             <p className="mt-1 text-xl sm:text-2xl font-black text-emerald-300">{inr(totalPaidNet)}</p>
-            <p className="text-[11px] text-emerald-200/70 mt-0.5">{paidBookings.length} direct transfers credited</p>
+            <p className="text-[11px] text-emerald-200/70 mt-0.5">
+              {paidBookings.length} {language === "mr" ? "थेट बँक ट्रान्सफर पूर्ण" : "direct transfers credited"}
+            </p>
           </div>
 
           <div className="rounded-2xl bg-white/5 p-3.5 border border-white/5">
             <p className="text-[11px] font-semibold text-emerald-300 uppercase tracking-wider">
-              Under Processing
+              {language === "mr" ? "प्रक्रियेतील रक्कम" : "Under Processing"}
             </p>
             <p className="mt-1 text-xl sm:text-2xl font-black">
               {processingNet > 0 ? inr(processingNet) : "₹0"}
             </p>
-            <p className="text-[11px] text-emerald-200/70 mt-0.5">Central ledger verification</p>
+            <p className="text-[11px] text-emerald-200/70 mt-0.5">
+              {language === "mr" ? "लेखापाल पडताळणी सुरू" : "Central ledger verification"}
+            </p>
           </div>
         </div>
       </div>

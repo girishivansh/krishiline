@@ -17,8 +17,10 @@ import {
   KeyRound,
   LogOut,
   User,
+  Languages,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth/AuthContext";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const NAV = [
   { label: "Home", href: "/" },
@@ -124,6 +126,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   const { user, isAuthenticated, logout } = useAuth();
+  const { language, toggleLanguage } = useLanguage();
 
   // Close dropdowns on outside click or Escape key
   useEffect(() => {
@@ -187,12 +190,23 @@ export function SiteHeader() {
 
         {/* Right side: Authenticated User Pill OR Login Dropdown & Farmer Portal button */}
         <div className="flex items-center gap-2 xl:gap-3 shrink-0">
+          {/* Language Switcher */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50/70 px-3 py-1.5 text-xs font-bold text-emerald-900 hover:bg-emerald-100/80 transition-colors shadow-2xs"
+            title="Switch Language / भाषा बदला"
+          >
+            <Languages size={14} className="text-emerald-700" />
+            <span>{language === "en" ? "मराठी" : "English"}</span>
+          </button>
+
           <Link
             href="/farmer"
             className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-[#f4faf6] px-3.5 py-1.5 text-xs font-bold text-[#1b7941] hover:bg-[#e8f5ec] transition-colors"
           >
             <Sprout size={15} />
-            <span>Farmer Portal</span>
+            <span>{language === "mr" ? "शेतकरी पोर्टल" : "Farmer Portal"}</span>
           </Link>
 
           {isAuthenticated && user ? (
@@ -356,6 +370,18 @@ export function SiteHeader() {
           className="border-t border-emerald-100 bg-white px-4 py-4 lg:hidden max-h-[calc(100vh-80px)] overflow-y-auto space-y-4"
           aria-label="Mobile Navigation"
         >
+          {/* Mobile Language Switcher */}
+          <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+            <span className="text-xs font-bold text-gray-600">Language / भाषा</span>
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-900"
+            >
+              <Languages size={13} className="text-emerald-700" />
+              <span>{language === "en" ? "मराठी" : "English"}</span>
+            </button>
+          </div>
           {isAuthenticated && user && (
             <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-3.5">
               <p className="text-xs font-bold text-slate-900">{user.name}</p>

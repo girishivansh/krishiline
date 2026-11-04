@@ -3,7 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/lib/store";
 import { AuthProvider } from "@/lib/auth/AuthContext";
+import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
+import { JudgeShowcaseHub } from "@/components/demo/JudgeShowcaseHub";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -26,9 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-full flex-col bg-white text-slate-900">
         <StoreProvider>
           <AuthProvider>
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
+            <LanguageProvider>
+              <SiteHeader />
+              <main className="flex-1">{children}</main>
+              <SiteFooter />
+              <JudgeShowcaseHub />
+            </LanguageProvider>
           </AuthProvider>
         </StoreProvider>
       </body>

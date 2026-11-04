@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
-import Image from "next/image";
-import { ScanLine, Lock, Scale, Printer, CheckCircle2, MessageCircle } from "lucide-react";
+import { ScanLine, Lock, Scale, Printer, CheckCircle2, MessageCircle, Sparkles } from "lucide-react";
 import { Card, Field, inputCls, PrimaryButton, GhostButton, PageHead, Empty } from "@/components/ui";
 import { useStore } from "@/lib/store";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { grossFor, hamaliFor, netFor, inr, GRADE_PRICES, GRADE_LABEL, type Grade } from "@/lib/data";
+import { KrishiVisionAI } from "@/components/ai/KrishiVisionAI";
+import { ThermalPrinterSimulator } from "@/components/hardware/ThermalPrinterSimulator";
 
 const STEPS = ["Scan Farmer QR Token", "Verify Details", "Enter Weight", "Select Quality Grade", "Generate Receipt", "Print QR Sticker"];
 
@@ -165,13 +166,36 @@ function ClerkDashboard() {
               )}
               {step === 4 && (
                 <div>
-                  <h2 className="text-lg font-bold">4 · Select quality grade</h2>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <h2 className="flex items-center gap-2 text-lg font-bold">
+                    <Sparkles className="text-emerald-700" /> 4 · Quality grading &amp; Optical AI Verification
+                  </h2>
+                  <p className="mt-1 text-sm text-gray-600">
+                    NAFED official pricing: Grade 1 (Premium Export, &gt;55mm) = ₹1,850/qtl · Grade 2 (Medium Standard, 40-54mm) = ₹1,550/qtl · Grade 3 (Small/Undergrade) = ₹1,200/qtl.
+                  </p>
+
+                  {/* Krishi-Vision Optical AI Analyzer */}
+                  <div className="mt-4 mb-5">
+                    <KrishiVisionAI
+                      batchNo={found.batchNo}
+                      initialGrade={grade}
+                      onGradeDetermined={(aiGrade) => setGrade(aiGrade)}
+                      context="clerk_intake"
+                    />
+                  </div>
+
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                    Confirmed Grade Selection (AI-Assisted):
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-3">
                     {(["1", "2", "3"] as Grade[]).map((g) => (
                       <button
                         key={g}
                         onClick={() => setGrade(g)}
-                        className={`rounded-2xl border-2 p-4 text-left ${grade === g ? "border-emerald-600 bg-emerald-50" : "border-gray-200 hover:border-emerald-300"}`}
+                        className={`rounded-2xl border-2 p-4 text-left transition-all ${
+                          grade === g
+                            ? "border-emerald-600 bg-emerald-50 shadow-xs"
+                            : "border-gray-200 hover:border-emerald-300"
+                        }`}
                       >
                         <span className="text-2xl">🧅</span>
                         <p className="mt-1 font-bold">{GRADE_LABEL[g]}</p>
@@ -216,39 +240,26 @@ function ClerkDashboard() {
               )}
               {step === 6 && (
                 <div>
-                  <h2 className="flex items-center gap-2 text-lg font-bold"><Printer /> 6 · Print QR sticker</h2>
+                  <h2 className="flex items-center gap-2 text-lg font-bold"><Printer className="text-emerald-700" /> 6 · Print Destructible QR Sticker</h2>
                   <p className="mt-1 text-sm text-gray-600">
                     The portable Bluetooth thermal printer on the clerk&apos;s desk prints a weather-proof, self-adhesive QR label the moment the receipt is generated. The labour team sticks it on the first jute bag — the warehouse supervisor scans this exact label at the gate.
                   </p>
-                  <div className="mt-4 flex flex-wrap items-center gap-6 rounded-2xl border p-5">
-                    {stickerQr ? (
-                      <Image
-                        src={stickerQr}
-                        alt="QR sticker for this batch"
-                        width={176}
-                        height={176}
-                        unoptimized
-                        className="h-44 w-44 rounded-lg border"
-                      />
-                    ) : (
-                      <div className="flex h-44 w-44 items-center justify-center rounded-lg border text-sm text-gray-500">Generating QR…</div>
-                    )}
-                    <div className="text-sm">
-                      <p className="font-bold">Krishi-Line</p>
-                      <p>Batch No: {found.batchNo}</p>
-                      <p>Weight: {safeWeight.toLocaleString("en-IN")} kg</p>
-                      <p>Grade: {grade === "1" ? "1 (Premium)" : grade === "2" ? "2 (Standard)" : "3 (Lower)"}</p>
-                      <p>Date: {found.displayDate}</p>
-                      <p className="mt-2 text-xs text-gray-500">Ultra-destructible label: peeling shreds it into confetti, so tag-swapping is physically impossible.</p>
-                      <a href={stickerQr} download={`${found.batchNo}-sticker.png`} className="mt-3 inline-block rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">
-                        Download sticker PNG
-                      </a>
-                    </div>
+                  <div className="mt-4">
+                    <ThermalPrinterSimulator
+                      batchNo={found.batchNo}
+                      farmer={found.farmer}
+                      weightKg={safeWeight}
+                      grade={grade}
+                      gradeLabel={GRADE_LABEL[grade]}
+                      dateStr={found.displayDate}
+                      token={found.token}
+                      qrCodeUrl={stickerQr}
+                    />
                   </div>
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-5 flex gap-2">
                     <GhostButton onClick={() => setStep(5)}>← Back</GhostButton>
                     <PrimaryButton onClick={() => { setToken(""); setStep(1); setMsg("Sticker printed. Next farmer in the queue, please."); }}>
-                      Done — next token
+                      Done — Next farmer in queue →
                     </PrimaryButton>
                   </div>
                 </div>

@@ -86,7 +86,8 @@
       "emailVerified": true,
       "phoneVerified": true,
       "createdAt": "2026-11-03T04:44:34.704Z",
-      "updatedAt": "2026-11-03T04:44:34.704Z"
+      "updatedAt": "2026-11-03T04:44:34.704Z",
+      "lastLoginAt": "2026-11-04T14:11:32.374Z"
     },
     {
       "id": "usr_admin_01",
@@ -103,7 +104,8 @@
       "emailVerified": true,
       "phoneVerified": true,
       "createdAt": "2026-11-03T04:44:34.704Z",
-      "updatedAt": "2026-11-03T04:44:34.704Z"
+      "updatedAt": "2026-11-03T04:44:34.704Z",
+      "lastLoginAt": "2026-11-04T14:11:21.654Z"
     },
     {
       "id": "usr_farmer_01",
@@ -125,17 +127,6 @@
   ],
   "sessions": [
     {
-      "id": "sess_9a8d493a19b99030",
-      "token": "b245f6c806711dba048306394da5177ea4a6b1b7ae1e995110e9d9b32611af82",
-      "userId": "usr_1793682769189_62db21dd",
-      "role": "clerk",
-      "createdAt": 1793682769480,
-      "expiresAt": 1793689969480,
-      "rememberMe": false,
-      "ipAddress": "::1",
-      "userAgent": "node"
-    },
-    {
       "id": "sess_441c706eef6a021e",
       "token": "304ff59a40530842e6c8910999943bd1bb03f6b147f1102a9264ebf67e28d325",
       "userId": "usr_1793682770572_f53822fe",
@@ -144,6 +135,28 @@
       "expiresAt": 1796274770580,
       "rememberMe": true,
       "ipAddress": "::1"
+    },
+    {
+      "id": "sess_b7d5d13d9aa86739",
+      "token": "6ffb36d69e99b577babb9351346776f207921e315e5bd697dace7ff95aaf43a8",
+      "userId": "usr_admin_01",
+      "role": "admin",
+      "createdAt": 1793801481658,
+      "expiresAt": 1796393481658,
+      "rememberMe": true,
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "sess_1527f416e414d0b6",
+      "token": "2d10b6a0cc706eeeceec83ac566dcd35b72bb532970a771d8540ade701ff655b",
+      "userId": "usr_fpo_01",
+      "role": "fpo",
+      "createdAt": 1793801492377,
+      "expiresAt": 1796393492377,
+      "rememberMe": true,
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
     }
   ],
   "resetTokens": [
@@ -156,6 +169,26 @@
     }
   ],
   "auditLogs": [
+    {
+      "userId": "usr_fpo_01",
+      "identifier": "EMP-FPO-01",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: fpo (FPO Cooperative Manager)",
+      "ip": "::1",
+      "id": "log_1793801492389_1125068d",
+      "timestamp": "2026-11-04T14:11:32.390Z"
+    },
+    {
+      "userId": "usr_admin_01",
+      "identifier": "EMP-ADMIN-01",
+      "action": "LOGIN",
+      "status": "SUCCESS",
+      "details": "Role authenticated: admin (System Administrator)",
+      "ip": "::1",
+      "id": "log_1793801481672_c1d15ea4",
+      "timestamp": "2026-11-04T14:11:21.672Z"
+    },
     {
       "userId": "usr_coll_1004",
       "identifier": "EMP-1004",

@@ -5,6 +5,8 @@ import { Card, Badge, PageHead, PrimaryButton } from "@/components/ui";
 import { useStore } from "@/lib/store";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DISTRICT, CENTRE_COMPARISON, SUSPICIOUS, INVESTIGATIONS } from "@/lib/data";
+import { NashikMandiGeoMap, type MandiGeoNode } from "@/components/vigilance/NashikMandiGeoMap";
+import { FlyingSquadRaidModal } from "@/components/vigilance/FlyingSquadRaidModal";
 
 const GRADE_CHART = [
   { centre: "Center A", "Grade-1": 42, "Grade-2": 30, "Grade-3": 20 },
@@ -30,6 +32,7 @@ function CollectorDashboard() {
   const { bookings, updateBooking } = useStore();
   const [actions, setActions] = useState<Record<string, string>>({});
   const [reportMsg, setReportMsg] = useState("");
+  const [raidTargetMandi, setRaidTargetMandi] = useState<MandiGeoNode | null>(null);
   const otherCentres = DISTRICT.quintalsProcured - CENTRE_COMPARISON.reduce((s, c) => s + c.qtyQuintals, 0);
 
   const freezeBatch = (batchNo: string) => {
@@ -49,6 +52,19 @@ function CollectorDashboard() {
     const b178 = bookings.find((b) => b.batchNo === "B00178" || b.batchNo === "B00127");
     if (b178) {
       updateBooking(b178.id, { paymentStatus: "On Hold", warehouseStatus: "Flagged" });
+    }
+  };
+
+  const handleConfirmRaid = (mandiId: string, freezeTreasury: boolean) => {
+    setActions((p) => ({ ...p, B00124: "Investigating", B00156: "Investigating", B00178: "Frozen", B00126: "Frozen" }));
+    if (freezeTreasury) {
+      bookings.forEach((b) => {
+        if (b.centreShort?.toLowerCase().includes("nashik") || b.centre?.toLowerCase().includes("nashik")) {
+          if (b.paymentStatus === "Estimated" || b.paymentStatus === "Processing") {
+            updateBooking(b.id, { paymentStatus: "On Hold", warehouseStatus: "Flagged" });
+          }
+        }
+      });
     }
   };
 
@@ -101,6 +117,21 @@ function CollectorDashboard() {
           <p className="text-2xl font-bold">G1 {DISTRICT.grade1Pct}% · G2 {DISTRICT.grade2Pct}% · G3 {DISTRICT.grade3Pct}%</p>
         </Card>
       </div>
+
+      {/* Interactive Nashik District APMC Geo-Spatial Vigilance Grid */}
+      <div className="mt-6">
+        <NashikMandiGeoMap
+          onDispatchRaid={(mandi) => setRaidTargetMandi(mandi)}
+        />
+      </div>
+
+      {raidTargetMandi && (
+        <FlyingSquadRaidModal
+          mandi={raidTargetMandi}
+          onClose={() => setRaidTargetMandi(null)}
+          onConfirmRaid={handleConfirmRaid}
+        />
+      )}
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <Card className="overflow-x-auto p-5">
